@@ -1,0 +1,75 @@
+﻿@model TA_project.ViewModel.FlightViewModel
+@using TA_project.Models;
+
+
+@{
+    ViewBag.Title = "Flights";
+}
+<center>
+    <h1 style="font-family: 'Berlin Sans FB'; font-size: 400%">Travel Agency SCE</h1>
+</center>
+<!DOCTYPE html>
+<link href="~/StyleSheet1.css" rel="stylesheet" />
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Flight</title>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</head>
+
+<body>
+    @{
+        ViewBag.Title = "Flights Table";
+    }
+    <br />
+    <br />
+    <div class="alert alert-light">
+        <div>
+            <a class="btn btn-primary btn-sm" href="/Admin/AddFlight">Add Flight</a>
+            <br />
+            <br />
+            <h2>Flights Table</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID  </th>
+                        <th>Origin Country  </th>
+                        <th>Destination  </th>
+                        <th>Date  </th>
+                        <th>Time  </th>
+                        <th>Price  </th>
+                        <th>Plane's Type</th>
+                        <th>Tickets  </th>
+                    </tr>
+                </thead>
+
+                @foreach (Flight fl in Model.flightsList)
+                {
+                    <tbody>
+                        <tr>
+                            <td>@fl.id</td>
+                            <td>@fl.originCountry</td>
+                            <td>@fl.destination </td>
+                            <td>@fl.date1</td>
+                            <td>@fl.time</td>
+                            <td>@fl.price</td>
+                            <td>@fl.type1</td>
+                            <td>@fl.tickets</td>
+
+                            <td>@Html.ActionLink("Edit", "Edit", new { id = fl.id })</td>
+                            <td>@Html.ActionLink("Delete", "Delete", new { id = fl.id })</td>
+                        </tr>
+                    </tbody>
+
+                }
+            </table>
+
+        </div>
+    </div>
+</body>
+</html>
+
+
+

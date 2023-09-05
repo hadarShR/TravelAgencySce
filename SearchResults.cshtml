@@ -1,0 +1,41 @@
+﻿@model TA_project.ViewModel.FlightViewModel
+@using TA_project.Models;
+
+
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID  </th>
+                <th>Origin Country  </th>
+                <th>Destination  </th>
+                <th>Date  </th>
+                <th>Time  </th>
+                <th>Price  </th>
+                <th>Tickets  </th>
+            </tr>
+        </thead>
+
+        @foreach (Flight fl in Model.flightsList)
+        {
+            <tbody>
+                <tr>
+                    <td>@fl.id</td>
+                    <td>@fl.originCountry</td>
+                    <td>@fl.destination </td>
+                    <td>@fl.date1</td>
+                    <td>@fl.time</td>
+                    <td>@fl.price</td>
+                    <td>@fl.tickets</td>
+                    <td>@Html.ActionLink("Edit", "Edit", new { id = fl.id })</td>
+                    <td>@Html.ActionLink("Delete", "Delete", new { id = fl.id })</td>
+                    @*<td>
+                            <a class="btn btn-primary btn-sm" href="/Admin/Edit?id=@fl.id">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="/Admin/Delete?id=@fl.id">Delete</a>
+                        </td>*@
+                </tr>
+            </tbody>
+
+        }
+    </table>
+</body>

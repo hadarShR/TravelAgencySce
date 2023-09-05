@@ -1,0 +1,190 @@
+﻿@model TA_project.ViewModel.UserViewModel
+@using TA_project.Models;
+
+
+<header>
+    <center><h1 style="font-family: 'Berlin Sans FB'; font-size: 400%">Travel Agency SCE</h1></center>
+    <center><h1 style="font-family: 'Ink Free'; font-size: 300%">Payment Page</h1></center>
+</header>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<br />
+<body>
+    @using (Html.BeginForm("Payment", "User", FormMethod.Post))
+    {
+    <div class="alert alert-success">
+        <center>
+            <form action="Payment" method="post">
+                @foreach (User x in Model.users)
+                {
+                    if (x.userName == Session["currUserName"].ToString())
+                    {
+                        if (x.firstName == "")
+                        {
+                            <p>
+                                <b><label>First name:</label></b><br />
+                                <input type="text" name="firstName" value="@Request.Form["firstName"]" />
+
+                                @Html.ValidationMessage("firstName")
+                            </p>
+                            <p>
+                                <b><label>Last name:</label></b><br />
+                                <input type="text" name="lastName" value="@Request.Form["lastName"]" />
+
+                                @Html.ValidationMessage("lastName")
+                            </p>
+                            <p>
+                                <b><label>Id:</label></b><br />
+                                <input type="text" name="id" value="@Request.Form["id"]" />
+
+                                @Html.ValidationMessage("id")
+                            </p>
+                            <p>
+                                <b><label>Card number:</label></b><br />
+                                <input type="text" name="card" value="@Request.Form["card"]" />
+                                @Html.ValidationMessage("card")
+                            </p>
+                            <p>
+                                <b><label>Three digits:</label></b><br />
+                                <input type="text" name="threeDigits" value="@Request.Form["threeDigits"]" />
+
+                                @Html.ValidationMessage("threeDigits")
+                            </p>
+                            <p>
+                                <b><label>Month</label></b>
+                                <select id="monthValidity" name="monthValidity" class="form-control">
+                                    <option>-- select an option --</option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <br />
+                                <b><label>Year</label></b>
+                                <input type="number" name="yearValidity" min="2023" max="2060" /><br />
+                            </p>
+                            <b><label>Remember me</label></b>
+                            @Html.CheckBox("saveCard", false)
+                            @Html.CheckBox("flag", false, new { style = "visibility:hidden", id = "none" })
+                        }
+                        else
+                        {
+                            <p>
+                                <b><label>First name:</label></b><br />
+                                <input type="text" name="firstName" value="@x.firstName" />
+
+                            </p>
+                            <p>
+                                <b><label>Last name:</label></b><br />
+                                <input type="text" name="lastName" value="@x.lastName" />
+
+                            </p>
+                            <p>
+                                <b><label>Card:</label></b><br />
+                                <input type="text" name="card" value="@x.card" />
+
+                            </p>
+                            <p>
+                                <b><label>Id:</label></b><br />
+                                <input type="text" name="id" value="@x.id" />
+
+                            </p>
+                            <p>
+                                <b><label>Three digits on the back of the card:</label></b><br />
+                                <input type="text" name="threeDigits" value="@x.threeDigits" />
+
+                            </p>
+                            <p>
+                                <b><label>Month:</label></b><br />
+                                <input type="text" name="monthValidity" value="@x.monthValidity" />
+
+                            </p>
+                            <p>
+                                <b><label>Year:</label></b><br />
+                                <input type="text" name="yearValidity" value="@x.yearValidity" />
+
+                            </p>
+                            @*<b><label>Remember me</label></b>*@
+                            @Html.CheckBox("saveCard", true, new { style = "visibility:hidden", id = "none" })
+                            @Html.CheckBox("flag", true, new { style = "visibility:hidden", id = "none" })
+                        }
+
+
+                        <br />
+                        <br />
+                        <b><label style="font-size: 20px">Total price:</label></b>
+                        <b><label style="font-size: 20px">@ViewBag.price</label></b>
+                        <b><label style="font-size: 20px">$</label><br /></b>
+                        <br />
+                        <input class="btn btn-primary btn-sm" type="submit" value="Pay" />
+                        <a class="btn btn-primary btn-sm" href="/User/ShoppingCart">Back to cart</a>
+
+
+                        if (ViewBag.errorname != null)
+                        {
+                            <span style="background: tomato; color: black">@ViewBag.errorname</span>
+                            <br />
+                        }
+                        else if (ViewBag.errorid != null)
+                        {
+                            <span style="background: tomato; color: black">@ViewBag.errorid</span>
+                            <br />
+                        }
+                        else if (ViewBag.errorcard != null)
+                        {
+                            <span style="background: tomato; color: black">@ViewBag.errorcard</span>
+                            <br />
+                        }
+                        else if (ViewBag.errordate != null)
+                        {
+                            <span style="background: tomato; color: black">@ViewBag.errordate</span>
+                            <br />
+                        }
+                        if (ViewBag.error != null)
+                        {
+                            <span style="background: tomato; color: black">@ViewBag.error</span>
+                            <br />
+                        }
+                        else if (ViewBag.error3 != null)
+                        {
+                            <span style="background: tomato; color: black">@ViewBag.error3</span>
+                            <br />
+                        }
+                        else if (ViewBag.errormonth != null)
+                        {
+                            <span style="background: tomato; color: black">@ViewBag.errormonth</span>
+                            <br />
+                        }
+                        else if (ViewBag.erroryear != null)
+                        {
+                            <span style="background: tomato; color: black">@ViewBag.erroryear</span>
+                            <br />
+                        }
+
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+
+            </form>
+
+        </center>
+    </div>
+    }
+        
+</body>
+

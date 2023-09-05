@@ -1,0 +1,103 @@
+﻿@model TA_project.ViewModel.TicketViewModel
+@using TA_project.Models;
+
+<link href="~/StyleSheet1.css" rel="stylesheet" />
+<header>
+    <center>
+        <h1 style="font-family: 'Berlin Sans FB'; font-size: 400%">Travel Agency SCE</h1>
+        <h1 style="font-family: 'Segoe Script'; font-size:250%">The best flight deals to everywhere, from anywhere</h1>
+    </center>
+</header>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<body>
+    @{
+        ViewBag.Title = "Your Tickets";
+    }
+    <br />
+    <br />
+    <center>
+        <div class="alert alert-light">
+            <div>
+                <br />
+                <br />
+                <h1>Your Tickets</h1>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            @*<th>ID ticket</th>*@
+                            <th>ID flight</th>
+                            <th>Plane's type</th>
+                            <th>From  </th>
+                            <th>To  </th>
+                            <th>Date  </th>
+                            <th>Time  </th>
+                            <th>Price  </th>
+                            <th>Travellers</th>
+                        </tr>
+                    </thead>
+
+                    @foreach (FlightTicket fl in Model.ticketsList)
+                    {
+                        <tbody>
+                            <tr>
+                                @*<td>@fl.idT</td>*@
+                                <td>@fl.idF</td>
+                                <td>@fl.type2</td>
+                                <td>@fl.originCountry</td>
+                                <td>@fl.destination</td>
+                                <td>@fl.go1</td>
+                                <td>@fl.time1</td>
+                                <td>@fl.price</td>
+                                <td>@fl.amountTickets</td>
+                                <td>@Html.ActionLink("Delete", "DeleteTicket", new { id = fl.idT })</td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+                <a class="btn btn-success btn-sm" href="/User/Payment">For payment</a>
+                <a class="btn btn-success btn-sm" href="/User/UserHomePage">Continue shopping</a>
+                <span style="background:blue">@ViewBag.price</span>
+            </div>
+        </div>
+
+    </center>
+    <left>
+        <div class="alert alert-secondary">
+            <form action="Save" method="post">
+                <b><label style="color:black">Change number of tickets</label><br /></b>
+                <label style="color:black">Enter flight ID:</label>
+                <input type="text" name="idF" /><br />
+                <label style="color:black">Enter number ticket:</label>
+                <input type="number" name="numTicket" min="1" max="400" /><br />
+                <input class="btn btn-primary btn-sm" type="submit" value="Save" /> <br />
+                <br />
+
+
+
+                @{
+                    if (ViewBag.error70 != null)
+                    {
+                        <span style="background: tomato; color: black">@ViewBag.error70</span>
+                        <br />
+                    }
+                    else if (ViewBag.errordate != null)
+                    {
+                        <span style="background: tomato; color: black ">@ViewBag.errordate</span>
+                        <br />
+                    }
+                    else if (ViewBag.error71 != null)
+                    {
+                        <span style="background: tomato; color: black ">@ViewBag.error71</span>
+                        <br />
+                    }
+
+                }
+            </form>
+        </div>
+    </left>
+</body>

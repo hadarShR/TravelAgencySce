@@ -1,0 +1,23 @@
+﻿@model TA_project.ViewModel.TicketViewModel
+@using TA_project.Models;
+
+@{
+    ViewBag.Title = "";
+}
+<html>
+<body>
+    <center>
+        <h3>Are you sure you want to delete this?</h3><br />
+        <div>
+            @using (Html.BeginForm())
+             {
+                 @Html.AntiForgeryToken()
+                 <div class="form-actions no-color">
+                     <input type="submit" value="Delete Ticket" class="btn btn-danger btn-sm"/>
+                     <a class="btn btn-primary btn-sm" href="/User/UserHomePage">Back To List</a>
+                 </div>
+             }
+         </div>
+    </center>
+</body>
+</html>

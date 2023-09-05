@@ -1,0 +1,35 @@
+﻿@model TA_project.ViewModel.TicketViewModel
+@using TA_project.Models;
+<link href="~/StyleSheet1.css" rel="stylesheet" />
+<body>
+    <div class="alert alert-light">
+        <center>
+            <p>
+                <h3 style="color:black">How many tickets you want to buy?:</h3><br />
+                <input type="number" id="quantity" name="amountTickets" value="@Request.Form["amountTickets"]" min="1" max="400" />
+                @Html.ValidationMessageFor(x => x.flightTicket.amountTickets)
+            </p>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @{
+                        if (ViewBag.error66 != null)
+                        {
+                            <span style="Background: tomato">@ViewBag.error66</span>
+                            <br />
+                        }
+                    }
+                </div>
+            </div>
+            
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Buy" class="btn btn-success btn-sm" />
+                    <a class="btn btn-primary btn-sm" href="/User/UserHomePage">Continue shopping</a>
+                </div>
+            }
+        </center>
+    </div>
+</body>

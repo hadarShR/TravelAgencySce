@@ -1,0 +1,77 @@
+﻿@model TA_project.ViewModel.UserViewModel
+@using TA_project.Models;
+@{
+    //Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<!DOCTYPE html>
+<link href="~/StyleSheet1.css" rel="stylesheet" />
+<header>
+    <center>
+        <h1 style="font-family: 'Berlin Sans FB'; font-size: 400%">Travel Agency SCE</h1>
+        <h1 style="font-family: 'Segoe Script'; font-size:250%">The best flight deals to everywhere, from anywhere</h1>
+    </center>
+</header>
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+</head>
+
+<body>
+    <div>
+        @using (Html.BeginForm("LoginPage", "Login", FormMethod.Post))
+        {
+            @*if (Session["LogoutFname"] != null)
+                {
+                    <span style="color:red">@Session["LogoutFname"],You are logout.Have a nice Day!</span>
+                    <br />
+                    <br />
+                    Session["LogoutFname"] = null;
+                }
+                else
+                {
+                    <br />
+                    <div style="background-color:white">
+                        <font size="4" color="yellowgreen">Login to see information</font>
+                    </div>
+                }*@
+
+            <br />
+            <center>
+                <div class="agile-field-txt">
+                    <div class="col-md-10">
+                        <b>User Name  :</b> @Html.TextBoxFor(m => m.user.userName) @Html.ValidationMessageFor(x => x.user.userName)
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div>
+                    <div class="col-md-10">
+                        <b>Password  :</b> @Html.PasswordFor(m => m.user.Password) @Html.ValidationMessageFor(x => x.user.Password)
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div>
+                    <div class="col-md-10">
+                        <input id="Submit1" type="submit" value="Login" class="btn btn-primary btn-sm" />
+                    </div>
+                </div>
+                <br />
+                <span style="background:tomato">@ViewBag.UserORPassError</span>
+            </center>
+
+        }
+    </div>
+</body>
+</html>
+
+
+
+
+
