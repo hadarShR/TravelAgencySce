@@ -1,4 +1,4 @@
-# TravelAgencySce
+# Travel Agency Sce
 A website for managing the Travel Flights booking at the Travel Agency (local host)
 using all the technologies taught during the lab sessions
 Project was written in C# mvc
